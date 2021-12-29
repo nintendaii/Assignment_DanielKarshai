@@ -14,7 +14,7 @@ public class UnitFoodController : ComponentControllerBase, IBindComponent
     public void RandomizePosition()
     {
         var bounds = gridArea.bounds;
-
+        var a = new Color();
         // Pick a random position inside the bounds
         var x = Random.Range(bounds.min.x, bounds.max.x);
         var y = Random.Range(bounds.min.y, bounds.max.y);
