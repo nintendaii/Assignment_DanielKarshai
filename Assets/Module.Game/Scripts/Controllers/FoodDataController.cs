@@ -4,6 +4,7 @@ using Module.Core;
 using Module.Core.MVC;
 using Module.Game.Scripts.Models;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Module.Game.Scripts.Controllers
 {
@@ -23,10 +24,17 @@ namespace Module.Game.Scripts.Controllers
             else
             {
                 WriteDataToJson();
+                ReadDataFromJson();
             }
         }
 
-        public FoodModel[] GetFoodData() => foodModels;
+        public FoodModel GetRandomFood()
+        {
+            var f = foodModels;
+            var randI = Random.Range(0, f.Length);
+            return foodModels[randI];
+        }
+        
         private void WriteDataToJson()
         {
             try
@@ -34,12 +42,12 @@ namespace Module.Game.Scripts.Controllers
                 var foods = new FoodModel[2];
                 foods[0] = new FoodModel
                 {
-                    color = new[] { 255f, 0f, 0f, 255f },
+                    color = new[] { 1f, 1f, 0f, 1f },
                     points = 20
                 };
                 foods[1] = new FoodModel
                 {
-                    color = new[] { 100, 9f, 201f, 255f },
+                    color = new[] { 1f, 0f, 0f, 1f },
                     points = 10
                 };
 

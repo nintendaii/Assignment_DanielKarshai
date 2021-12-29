@@ -8,5 +8,17 @@ namespace Module.Game.Scripts.Models
     {
         public float[] color;
         public int points;
+
+        public override bool Equals(object obj)
+        {
+            var f = obj as FoodModel;
+            if (f==null)
+            {
+                return false;
+            }
+
+            return f.points.Equals(points);
+        }
     }
+    
 }

@@ -1,20 +1,43 @@
-﻿using Module.Core;
+﻿using System;
+using Module.Core;
 using Module.Core.MVC;
+using Module.Game.Scripts.Controllers;
+using Module.Game.Scripts.Models;
 using UnityEngine;
+using Zenject;
+using Random = UnityEngine.Random;
 
-public class UnitFoodController : ComponentControllerBase, IBindComponent
+[Serializable]
+public class UnitFoodView : ViewBase
 {
+    [SerializeField] public SpriteRenderer sprite;
+}
+public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodView>, IBindComponent
+{
+    [Inject] private readonly FoodDataController foodDataController;
+    [Inject] private readonly ScoreController scoreController;
+    
     public Collider2D gridArea;
+    private FoodModel currentFoodModel;
 
     private void Start()
     {
         RandomizePosition();
+        RandomizeFoodType();
     }
 
-    public void RandomizePosition()
+    private void RandomizeFoodType()
+    {
+        currentFoodModel = foodDataController.GetRandomFood();
+        var colorData = currentFoodModel.color;
+        View.sprite.color = new Color(colorData[0], colorData[1], colorData[2], colorData[3]);
+    }
+
+    public FoodModel GetCurrentFoodModel() => currentFoodModel;
+
+    private void RandomizePosition()
     {
         var bounds = gridArea.bounds;
-        var a = new Color();
         // Pick a random position inside the bounds
         var x = Random.Range(bounds.min.x, bounds.max.x);
         var y = Random.Range(bounds.min.y, bounds.max.y);
@@ -28,6 +51,8 @@ public class UnitFoodController : ComponentControllerBase, IBindComponent
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        scoreController.Hit(currentFoodModel);
         RandomizePosition();
+        RandomizeFoodType();
     }
 }
