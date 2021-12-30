@@ -20,7 +20,7 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
     public Collider2D gridArea;
     private FoodModel currentFoodModel;
 
-    private void Start()
+    private void Awake()
     {
         RandomizePosition();
         RandomizeFoodType();
@@ -30,6 +30,7 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
     {
         currentFoodModel = foodDataController.GetRandomFood();
         var colorData = currentFoodModel.color;
+        print(currentFoodModel);
         View.sprite.color = new Color(colorData[0], colorData[1], colorData[2], colorData[3]);
     }
 

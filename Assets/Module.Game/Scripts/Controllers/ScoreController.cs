@@ -1,4 +1,5 @@
 using System;
+using ModestTree;
 using Module.Core;
 using Module.Core.MVC;
 using Module.Game.Scripts.Models;
@@ -26,11 +27,19 @@ namespace Module.Game.Scripts.Controllers
         [Inject] private readonly UnitFoodController unitFoodController;
         private void Start()
         {
+            InitializeScore();
+            print($"Started score: {Model.currentFoodModel}");
+        }
+
+        public void InitializeScore()
+        {
             Model.currentScore = 0;
             Model.currentStreak = 0;
             Model.currentFoodModel = unitFoodController.GetCurrentFoodModel();
             RefreshView();
         }
+
+        public int GetScore() => Model.currentScore;
 
         private void RefreshView() => View.scoreText.text = Model.currentScore.ToString();
         

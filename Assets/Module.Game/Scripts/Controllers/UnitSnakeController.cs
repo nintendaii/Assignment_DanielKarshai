@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using Module.Core;
 using Module.Core.MVC;
+using Module.Game.Scripts.Controllers;
 using UnityEngine;
+using Zenject;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class UnitSnakeController : ComponentControllerBase, IBindComponent
 {
+    [Inject] private readonly GameOverController gameOverController;
+    [Inject] private readonly ScoreController scoreController;
+    
     private List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
     public Vector2 direction = Vector2.right;
@@ -60,8 +65,13 @@ public class UnitSnakeController : ComponentControllerBase, IBindComponent
         _segments.Add(segment);
     }
 
+    private void GameOver()
+    {
+        gameOverController.Execute();
+    }
     public void ResetState()
     {
+        scoreController.InitializeScore();
         direction = Vector2.right;
         transform.position = Vector3.zero;
 
@@ -80,6 +90,6 @@ public class UnitSnakeController : ComponentControllerBase, IBindComponent
     {
         if (other.tag == "Food")
             Grow();
-        else if (other.tag == "Obstacle") ResetState();
+        else if (other.tag == "Obstacle") GameOver();
     }
 }

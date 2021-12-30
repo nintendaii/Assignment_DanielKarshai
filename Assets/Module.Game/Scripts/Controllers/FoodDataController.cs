@@ -14,7 +14,7 @@ namespace Module.Game.Scripts.Controllers
         private string pathToJson;
         private FoodModel[] foodModels;
 
-        private void Start()
+        private void Awake()
         {
             pathToJson = $"{Application.persistentDataPath}/{foodDataFileName}";
             if (File.Exists(pathToJson))
