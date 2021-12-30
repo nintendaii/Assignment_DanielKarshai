@@ -12,7 +12,7 @@ namespace Module.Game.Scripts.Controllers
     [Serializable]
     public class ScoreView : ViewBase
     {
-        [SerializeField] public TMP_Text scoreText;
+        [SerializeField] public TMP_Text scoreText, streakText;
     }
 
     [Serializable]
@@ -20,7 +20,7 @@ namespace Module.Game.Scripts.Controllers
     {
         public int currentScore;
         public int currentStreak;
-        public FoodModel currentFoodModel;
+        public FoodSchema currentFoodSchema;
     }
 
     public class ScoreController : ComponentControllerBase<ScoreModel, ScoreView>, IBindComponent
@@ -30,14 +30,13 @@ namespace Module.Game.Scripts.Controllers
         private void Start()
         {
             InitializeScore();
-            print($"Started score: {Model.currentFoodModel}");
         }
 
         public void InitializeScore()
         {
             Model.currentScore = 0;
-            Model.currentStreak = 0;
-            Model.currentFoodModel = unitFoodController.GetCurrentFoodModel();
+            Model.currentStreak = 1;
+            Model.currentFoodSchema = unitFoodController.GetCurrentFoodModel();
             RefreshView();
         }
 
@@ -49,22 +48,22 @@ namespace Module.Game.Scripts.Controllers
         private void RefreshView()
         {
             View.scoreText.text = Model.currentScore.ToString();
+            View.streakText.text = $"Streak: x{Model.currentStreak}";
         }
 
-        public void Hit(FoodModel foodModel)
+        public void Hit(FoodSchema foodSchema)
         {
-            if (Model.currentFoodModel.points.Equals(foodModel.points))
+            if (Model.currentFoodSchema.points.Equals(foodSchema.points))
             {
                 Model.currentStreak += 1;
             }
             else
             {
-                Model.currentFoodModel = foodModel;
+                Model.currentFoodSchema = foodSchema;
                 Model.currentStreak = 1;
             }
 
-            print($"Streak: {Model.currentStreak}");
-            Model.currentScore += foodModel.points * Model.currentStreak;
+            Model.currentScore += foodSchema.points * Model.currentStreak;
             RefreshView();
         }
     }

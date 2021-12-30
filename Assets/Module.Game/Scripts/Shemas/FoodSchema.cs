@@ -4,14 +4,14 @@ using UnityEngine;
 namespace Module.Game.Scripts.Models
 {
     [Serializable]
-    public class FoodModel
+    public class FoodSchema
     {
         public float[] color;
         public int points;
 
         public override bool Equals(object obj)
         {
-            var f = obj as FoodModel;
+            var f = obj as FoodSchema;
             if (f == null) return false;
 
             return f.points.Equals(points);

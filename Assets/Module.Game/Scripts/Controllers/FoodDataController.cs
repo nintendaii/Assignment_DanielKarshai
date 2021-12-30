@@ -12,7 +12,7 @@ namespace Module.Game.Scripts.Controllers
     {
         private const string foodDataFileName = "foodData.json";
         private string pathToJson;
-        private FoodModel[] foodModels;
+        private FoodSchema[] foodSchemas;
 
         private void Awake()
         {
@@ -28,24 +28,24 @@ namespace Module.Game.Scripts.Controllers
             }
         }
 
-        public FoodModel GetRandomFood()
+        public FoodSchema GetRandomFood()
         {
-            var f = foodModels;
+            var f = foodSchemas;
             var randI = Random.Range(0, f.Length);
-            return foodModels[randI];
+            return foodSchemas[randI];
         }
 
         private void WriteDataToJson()
         {
             try
             {
-                var foods = new FoodModel[2];
-                foods[0] = new FoodModel
+                var foods = new FoodSchema[2];
+                foods[0] = new FoodSchema
                 {
                     color = new[] { 1f, 1f, 0f, 1f },
                     points = 20
                 };
-                foods[1] = new FoodModel
+                foods[1] = new FoodSchema
                 {
                     color = new[] { 1f, 0f, 0f, 1f },
                     points = 10
@@ -66,7 +66,7 @@ namespace Module.Game.Scripts.Controllers
             try
             {
                 var fileData = File.ReadAllText(pathToJson);
-                foodModels = JsonHelper.FromJson<FoodModel>(fileData);
+                foodSchemas = JsonHelper.FromJson<FoodSchema>(fileData);
             }
             catch (Exception e)
             {

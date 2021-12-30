@@ -19,7 +19,7 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
     [Inject] private readonly ScoreController scoreController;
 
     public Collider2D gridArea;
-    private FoodModel currentFoodModel;
+    private FoodSchema _currentFoodSchema;
 
     private void Awake()
     {
@@ -29,15 +29,14 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
 
     private void RandomizeFoodType()
     {
-        currentFoodModel = foodDataController.GetRandomFood();
-        var colorData = currentFoodModel.color;
-        print(currentFoodModel);
+        _currentFoodSchema = foodDataController.GetRandomFood();
+        var colorData = _currentFoodSchema.color;
         View.sprite.color = new Color(colorData[0], colorData[1], colorData[2], colorData[3]);
     }
 
-    public FoodModel GetCurrentFoodModel()
+    public FoodSchema GetCurrentFoodModel()
     {
-        return currentFoodModel;
+        return _currentFoodSchema;
     }
 
     private void RandomizePosition()
@@ -56,7 +55,7 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        scoreController.Hit(currentFoodModel);
+        scoreController.Hit(_currentFoodSchema);
         RandomizePosition();
         RandomizeFoodType();
     }
