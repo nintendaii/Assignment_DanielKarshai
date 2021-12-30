@@ -7,8 +7,8 @@ This project is developed in Unity 2021.1.5f1
 There are 4 main modules:
 - `Core` - module with core architecture functionality;
 - `Project` - additional to Core module to extend architectures functionality
-- `Game` - module with the actual game
-- `MainMenu` - module with Main Menu screen
+- `Game` - module with the actual game scene
+- `MainMenu` - module with Main Menu scene
 
 ## Note
 To be able to use `[Inject]` all our classes should implement `IBindComponent` interface.
