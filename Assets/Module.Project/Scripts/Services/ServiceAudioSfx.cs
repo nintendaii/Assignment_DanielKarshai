@@ -3,8 +3,10 @@ using Module.Core.SO;
 using UnityEngine;
 using Zenject;
 
-namespace Module.Project.Services {
-    public class ServiceAudioSfx : ComponentControllerBase {
+namespace Module.Project.Services
+{
+    public class ServiceAudioSfx : ComponentControllerBase
+    {
         // [Inject] private readonly UnitAudioSfxControllerFactory unitAudioSfxControllerFactory;
         //
         // private IObjectPool<UnitAudioSfxController> objectPool;

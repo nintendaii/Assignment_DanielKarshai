@@ -1,14 +1,18 @@
 using Module.Core.MVC;
 
-namespace Module.Project.Managers {
-    public sealed partial class InternalCall : ControllerBase, IInternalCall {
-        public string ReadUrl() {
+namespace Module.Project.Managers
+{
+    public sealed partial class InternalCall : ControllerBase, IInternalCall
+    {
+        public string ReadUrl()
+        {
             var result = string.Empty;
             ReadUrlInner(ref result);
             return result;
         }
 
-        public string ReadParamFromUrl(string paramId) {
+        public string ReadParamFromUrl(string paramId)
+        {
             var result = string.Empty;
             ReadParamFromUrlInner(ref result, paramId);
             return result;

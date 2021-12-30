@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Module.Core;
+﻿using System.Collections.Generic;
 using Module.Core.MVC;
 using Module.Game.Scripts.Controllers;
 using UnityEngine;
 using Zenject;
+using IBindComponent = Module.Game.Scripts.IBindComponent;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -12,7 +11,7 @@ public class UnitSnakeController : ComponentControllerBase, IBindComponent
 {
     [Inject] private readonly GameOverController gameOverController;
     [Inject] private readonly ScoreController scoreController;
-    
+
     private List<Transform> _segments = new List<Transform>();
     public Transform segmentPrefab;
     public Vector2 direction = Vector2.right;
@@ -69,6 +68,7 @@ public class UnitSnakeController : ComponentControllerBase, IBindComponent
     {
         gameOverController.Execute();
     }
+
     public void ResetState()
     {
         scoreController.InitializeScore();

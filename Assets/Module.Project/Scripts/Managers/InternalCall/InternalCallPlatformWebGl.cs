@@ -1,5 +1,7 @@
-namespace Module.Project.Managers {
-    public sealed partial class InternalCall {
+namespace Module.Project.Managers
+{
+    public sealed partial class InternalCall
+    {
 #if !UNITY_EDITOR && UNITY_WEBGL
         [System.Runtime.InteropServices.DllImport("__Internal")] 
         private static extern string GetUrl();

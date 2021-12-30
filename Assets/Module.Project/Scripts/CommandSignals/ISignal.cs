@@ -1,3 +1,6 @@
-namespace Module.Project.CommandSignals {
-    public interface ISignal { }
+namespace Module.Project.CommandSignals
+{
+    public interface ISignal
+    {
+    }
 }

@@ -3,7 +3,7 @@ using Module.Core;
 using Module.Core.MVC;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -15,10 +15,12 @@ namespace Module.Game.Scripts.Controllers
         [SerializeField] public TMP_Text totalScoreText;
         [SerializeField] public Button okButton, restartButton;
     }
-    public class GameOverController: ComponentControllerBase<ModelBase, GameOverView>, IBindComponent
+
+    public class GameOverController : ComponentControllerBase<ModelBase, GameOverView>, IBindComponent
     {
         [Inject] private readonly UnitSnakeController unitSnakeController;
         [Inject] private readonly ScoreController scoreController;
+
         private void Awake()
         {
             HideComponent();
@@ -42,8 +44,8 @@ namespace Module.Game.Scripts.Controllers
 
         private void OnOkButtonPress()
         {
-            throw new NotImplementedException();
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Module.MainMenu/Scenes/Main");
         }
-        
     }
 }

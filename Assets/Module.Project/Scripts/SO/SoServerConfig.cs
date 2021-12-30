@@ -1,15 +1,21 @@
 using UnityEngine;
 using Zenject;
 
-namespace Module.Project.SO {
+namespace Module.Project.SO
+{
     [CreateAssetMenu(fileName = "ServerConfig", menuName = "Module/Project/ServerConfig")]
-    public class SoServerConfig : ScriptableObjectInstaller {
+    public class SoServerConfig : ScriptableObjectInstaller
+    {
         [SerializeField] private TextAsset token;
-        
-        public override void InstallBindings() {
+
+        public override void InstallBindings()
+        {
             Container.BindInstance(this);
         }
 
-        public string GetToken() => token == null ? string.Empty : token.text;
+        public string GetToken()
+        {
+            return token == null ? string.Empty : token.text;
+        }
     }
 }

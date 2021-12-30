@@ -34,7 +34,7 @@ namespace Module.Game.Scripts.Controllers
             var randI = Random.Range(0, f.Length);
             return foodModels[randI];
         }
-        
+
         private void WriteDataToJson()
         {
             try
@@ -59,7 +59,6 @@ namespace Module.Game.Scripts.Controllers
                 Debug.LogError(e.ToString());
                 throw;
             }
-            
         }
 
         private void ReadDataFromJson()
@@ -74,7 +73,6 @@ namespace Module.Game.Scripts.Controllers
                 Debug.LogError(e.ToString());
                 throw;
             }
-            
         }
     }
 }

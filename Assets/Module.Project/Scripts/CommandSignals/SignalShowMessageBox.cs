@@ -1,8 +1,11 @@
-namespace Module.Project.CommandSignals {
-    public class SignalShowMessageBox : ISignal {
+namespace Module.Project.CommandSignals
+{
+    public class SignalShowMessageBox : ISignal
+    {
         public readonly string Message;
 
-        public SignalShowMessageBox(string message) {
+        public SignalShowMessageBox(string message)
+        {
             Message = message;
         }
     }

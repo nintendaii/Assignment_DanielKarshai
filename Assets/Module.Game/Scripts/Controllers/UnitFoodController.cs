@@ -1,10 +1,10 @@
 ﻿using System;
-using Module.Core;
 using Module.Core.MVC;
 using Module.Game.Scripts.Controllers;
 using Module.Game.Scripts.Models;
 using UnityEngine;
 using Zenject;
+using IBindComponent = Module.Game.Scripts.IBindComponent;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -12,11 +12,12 @@ public class UnitFoodView : ViewBase
 {
     [SerializeField] public SpriteRenderer sprite;
 }
+
 public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodView>, IBindComponent
 {
     [Inject] private readonly FoodDataController foodDataController;
     [Inject] private readonly ScoreController scoreController;
-    
+
     public Collider2D gridArea;
     private FoodModel currentFoodModel;
 
@@ -34,7 +35,10 @@ public class UnitFoodController : ComponentControllerBase<ModelBase, UnitFoodVie
         View.sprite.color = new Color(colorData[0], colorData[1], colorData[2], colorData[3]);
     }
 
-    public FoodModel GetCurrentFoodModel() => currentFoodModel;
+    public FoodModel GetCurrentFoodModel()
+    {
+        return currentFoodModel;
+    }
 
     private void RandomizePosition()
     {

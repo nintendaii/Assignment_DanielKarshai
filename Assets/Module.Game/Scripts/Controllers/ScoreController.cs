@@ -22,9 +22,11 @@ namespace Module.Game.Scripts.Controllers
         public int currentStreak;
         public FoodModel currentFoodModel;
     }
-    public class ScoreController: ComponentControllerBase<ScoreModel, ScoreView>, IBindComponent
+
+    public class ScoreController : ComponentControllerBase<ScoreModel, ScoreView>, IBindComponent
     {
         [Inject] private readonly UnitFoodController unitFoodController;
+
         private void Start()
         {
             InitializeScore();
@@ -39,10 +41,16 @@ namespace Module.Game.Scripts.Controllers
             RefreshView();
         }
 
-        public int GetScore() => Model.currentScore;
+        public int GetScore()
+        {
+            return Model.currentScore;
+        }
 
-        private void RefreshView() => View.scoreText.text = Model.currentScore.ToString();
-        
+        private void RefreshView()
+        {
+            View.scoreText.text = Model.currentScore.ToString();
+        }
+
         public void Hit(FoodModel foodModel)
         {
             if (Model.currentFoodModel.points.Equals(foodModel.points))
@@ -59,7 +67,5 @@ namespace Module.Game.Scripts.Controllers
             Model.currentScore += foodModel.points * Model.currentStreak;
             RefreshView();
         }
-        
     }
-    
 }

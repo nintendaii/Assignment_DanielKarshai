@@ -12,13 +12,9 @@ namespace Module.Game.Scripts.Models
         public override bool Equals(object obj)
         {
             var f = obj as FoodModel;
-            if (f==null)
-            {
-                return false;
-            }
+            if (f == null) return false;
 
             return f.points.Equals(points);
         }
     }
-    
 }
